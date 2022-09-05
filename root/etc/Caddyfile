@@ -1,0 +1,17 @@
+http:// {
+    root * /data/docroot
+    php_fastcgi unix//var/run/php-fpm/www.sock
+    file_server
+
+    encode zstd gzip
+
+    log {
+        output stderr
+        level info
+    }
+
+    route /* {
+        try_files {path} {path}/ /index.php?{query}
+        
+    }
+}
