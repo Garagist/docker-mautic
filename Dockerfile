@@ -25,8 +25,7 @@ COPY root/etc/Caddyfile /etc/Caddyfile
 USER docker:docker
 
 
-
-FROM php:8.0-fpm-alpine AS worker
+FROM php:7.4-fpm-alpine AS worker
 
 LABEL vendor="Garagist"
 LABEL maintainer="David Spiola"
@@ -74,6 +73,7 @@ RUN set -x \
       msgpack \
       protobuf \
       imap \
+      intl \
     && IPE_DONT_ENABLE=1 install-php-extensions xdebug \
     && rm -f /usr/local/bin/install-php-extensions
 
@@ -87,6 +87,10 @@ RUN /usr/local/sbin/configure-php.sh && rm $PHP_INI_DIR/conf.d/allow_url_include
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
+# setup config direcotry
+RUN mkdir -p /data/docroot/app/config/
+RUN cp /usr/local/etc/mautic/paths_local.php /data/docroot/app/config/
+RUN mkdir -p /config/
 
 # SET DEFAULT USER
 RUN chmod +x /entrypoint.sh \
@@ -94,6 +98,7 @@ RUN chmod +x /entrypoint.sh \
     && mkdir -p /var/run/php-fpm/ \
     && mkdir -p /data \
     && chown $USER:$GROUP /var/run/php-fpm/ \
+    && chown $USER:$GROUP /config \
     && chown -R $USER:$GROUP /data;
 USER $USER:$GROUP
 
