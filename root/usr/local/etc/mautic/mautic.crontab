@@ -1,0 +1,19 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+       */5 * * * *     docker   php /data/bin/console mautic:import > /var/log/cron.pipe 2>&1
+5,20,35,50 * * * *     docker   php /data/bin/console mautic:campaigns:rebuild > /var/log/cron.pipe 2>&1
+2,17,32,47 * * * *     docker   php /data/bin/console mautic:campaigns:trigger > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *     docker   php /data/bin/console mautic:messages:send > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *     docker   php /data/bin/console mautic:emails:send > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *     docker   php /data/bin/console mautic:email:fetch > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *     docker   php /data/bin/console mautic:social:monitoring > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *     docker   php /data/bin/console mautic:webhooks:process > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *     docker   php /data/bin/console mautic:broadcasts:send > /var/log/cron.pipe 2>&1
+         * 1 * * *     docker   php /data/bin/console mautic:maintenance:cleanup --days-old=365 > /var/log/cron.pipe 2>&1
+        0 4 15 * *     docker   php /data/bin/console mautic:iplookup:download > /var/log/cron.pipe 2>&1
+       */5 * * * *     docker   php /data/bin/console mautic:reports:scheduler > /var/log/cron.pipe 2>&1
+        0 5 10 * *     docker   php /data/bin/console mautic:unusedip:delete > /var/log/cron.pipe 2>&1
+
+# download geoip db on start if it does not exist
+@reboot                docker   [[ "$(ls -A /data/bin/cache/ip_data 2>/dev/null)" ]] || php /data/bin mautic:iplookup:download > /var/log/cron.pipe 2>&1

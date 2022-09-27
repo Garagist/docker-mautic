@@ -49,7 +49,7 @@ RUN /usr/local/sbin/install-fixuid.sh
 RUN set -x \
     && cat /etc/os-release \
     && mkdir -p /data \
-    && apk --update add curl libcap git \
+    && apk --update add curl libcap git dcron libcap \
     && curl -sSLf -o /usr/local/bin/install-php-extensions \
            https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
        chmod +x /usr/local/bin/install-php-extensions \
@@ -84,12 +84,18 @@ RUN setcap CAP_NET_BIND_SERVICE=+ep /usr/bin/caddy
 # Configure PHP, allow_url_include is deprecated since PHP 7.4
 RUN /usr/local/sbin/configure-php.sh && rm $PHP_INI_DIR/conf.d/allow_url_include.ini
 
+#setup cron
+RUN chown $USER:$GROUP /usr/sbin/crond \
+    && setcap cap_setgid=ep /usr/sbin/crond
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 # setup config direcotry
 RUN mkdir -p /data/docroot/app/config/
+RUN mkdir -p /data/cron/
 RUN cp /usr/local/etc/mautic/paths_local.php /data/docroot/app/config/
+RUN cp /usr/local/etc/mautic/mautic.crontab /data/cron/
 RUN mkdir -p /config/
 
 # SET DEFAULT USER
@@ -98,6 +104,7 @@ RUN chmod +x /entrypoint.sh \
     && mkdir -p /var/run/php-fpm/ \
     && mkdir -p /data \
     && chown $USER:$GROUP /var/run/php-fpm/ \
+    && chown -R $USER:$GROUP /usr/local/docker-entrypoint.d/ \
     && chown $USER:$GROUP /config \
     && chown -R $USER:$GROUP /data;
 USER $USER:$GROUP
@@ -107,13 +114,7 @@ USER $USER:$GROUP
 WORKDIR /data
 
 # By default enable cron jobs
-ENV MAUTIC_RUN_CRON_JOBS true
-
-# Setting an Default database user for Mysql
-ENV MAUTIC_DB_USER root
-
-# Setting an Default database name for Mysql
-ENV MAUTIC_DB_NAME mautic
+ENV MAUTIC_CRON_RUN_JOBS true
 
 # Expose ports
 EXPOSE 80/tcp
