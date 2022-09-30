@@ -8,4 +8,7 @@ $paths = [
     'plugins'      => 'plugins',
     'translations' => 'translations',
     'local_config' => '/config/local.php',
+    'cache_path' => '/cache',
+    'tmp_path' => '/tmp/mautic',
+    'log_path' => '/logs',
 ];

@@ -14,8 +14,9 @@ DIR=/usr/local/docker-entrypoint.d
 if [ -d "$DIR" ]; then
   for SCRIPT in $DIR/*; do
     if [ -f $SCRIPT -a -x $SCRIPT ]; then
-      echo "Run mautic script: $SCRIPT ..."
+      echo -e "#######\nRun startup script: $SCRIPT:"
       $SCRIPT
+      echo -e "#######\n"
     fi
   done
 fi

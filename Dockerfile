@@ -91,30 +91,33 @@ RUN chown $USER:$GROUP /usr/sbin/crond \
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-# setup config direcotry
-RUN mkdir -p /data/docroot/app/config/
-RUN mkdir -p /data/cron/
-RUN cp /usr/local/etc/mautic/paths_local.php /data/docroot/app/config/
-RUN cp /usr/local/etc/mautic/mautic.crontab /data/cron/
-RUN mkdir -p /config/
-
 # SET DEFAULT USER
 RUN chmod +x /entrypoint.sh \
     && chmod +x /mode.sh \ 
     && mkdir -p /var/run/php-fpm/ \
     && mkdir -p /data \
+    && mkdir -p /cache \
+    && mkdir -p /log \
+    && mkdir -p /tmp/mautic \
     && chown $USER:$GROUP /var/run/php-fpm/ \
     && chown -R $USER:$GROUP /usr/local/docker-entrypoint.d/ \
-    && chown $USER:$GROUP /config \
-    && chown -R $USER:$GROUP /data;
+    && chmod -R +x /usr/local/docker-entrypoint.d/ \
+    && chown -R $USER:$GROUP /data \
+    && chown -R $USER:$GROUP /log \
+    && chown -R $USER:$GROUP /cache 
 USER $USER:$GROUP
-
 
 # Define working directory
 WORKDIR /data
 
 # By default enable cron jobs
 ENV MAUTIC_CRON_RUN_JOBS true
+
+# By default install composer dependencies on startup
+ENV MAUTIC_RUN_COMPOSER_INSTALL true
+
+# By default apply database mirgrations on startup
+ENV MAUTIC_RUN_MIGRAION true
 
 # Expose ports
 EXPOSE 80/tcp
