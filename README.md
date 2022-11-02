@@ -58,6 +58,12 @@ services:
  - .mautic/config:/config
 ```
 
+### Env variables
+- MAUTIC_CONTEXT=Development
+- MAUTIC_CRON_RUN_JOBS=true
+- MAUTIC_RUN_COMPOSER_INSTALL=true
+- MAUTIC_RUN_MIGRAION=true
+
 ## TODO's
 - Test oAuth support
 
