@@ -9,7 +9,7 @@ The official docker image is not suited for running in containered cluster envir
 3. dedicated directories for config and cache data (outside of document root)
 4. cloud ready startup routine with composer install and database migrations
 
-### Default Startup sequence scripts (`/usr/local/docker-entrypoint.d`)
+### Default startup sequence scripts (`/usr/local/docker-entrypoint.d`)
 1. Move config and cache data away from the document root.
 2. Automatically run composer install on each startup (optional)
 3. Automatically run Mautic migrations on each startup (optional)
