@@ -1,7 +1,7 @@
 # Mautic Docker Image
 Unofficial Mautic docker image for cloud infrastructure deployments. 
 ## Why?
-The official docker image is not suited for running in containered cluster environments. This project aims to improve that by focusing on a strict 'composer only' setup with a few config modifications and a customizable startup routine.
+The official docker image is not suited for running in cluster environments. This project aims to improve that by focusing on a strict 'composer only' setup with a few config modifications and a customizable startup routine.
 
 ### Key benefits
 1. dedicated docker user (no root execution)
@@ -16,7 +16,7 @@ The official docker image is not suited for running in containered cluster envir
 4. Setup cron jobs (optional)
 
 ### Custom startup sequence scripts (`/data/docker-entrypoint.d`)
-You may add custom startup scripts via volume mounts or project-specific images to configure Mautic accordingly to your needs. The scripts are executed in alphabetical order. We recommend to add a number to the filename. For instance: `100_hello-world.sh`. 
+You may add custom startup scripts via volume mounts or project-specific images to configure Mautic accordingly to your needs. The scripts are executed in alphabetical order. We recommend to add a number to the file name. For instance: `100_hello-world.sh`. 
 #### Example
 ```
 #!/bin/sh
@@ -37,12 +37,12 @@ If you would like to use the image to improve Mautic itself, or if you are worki
 version: '3.7'
 services:
  mautic:
- image: garagist/mautic:composer-7.4
- environment:
-   - MAUTIC_CONTEXT=Development
- volumes:
-   - ./:/data
-   - .mautic/config:/config
+   image: garagist/mautic:composer-7.4
+   environment:
+     - MAUTIC_CONTEXT=Development
+   volumes:
+     - ./:/data
+     - .mautic/config:/config
 ```
 ### Production run
 Set the MAUTIC_CONTEXT to production and you are ready to go
@@ -50,22 +50,22 @@ Set the MAUTIC_CONTEXT to production and you are ready to go
 version: '3.7'
 services:
  mautic:
- image: garagist/mautic:composer-7.4
- environment:
-   - MAUTIC_CONTEXT=Production
- volumes:
-   - ./:/data
-   - .mautic/config:/config
+   image: garagist/mautic:composer-7.4
+   environment:
+     - MAUTIC_CONTEXT=Production
+   volumes:
+     - ./:/data
+     - .mautic/config:/config
 ```
 
 ### Env variables
 - MAUTIC_CONTEXT=Development
 - MAUTIC_CRON_RUN_JOBS=true
 - MAUTIC_RUN_COMPOSER_INSTALL=true
-- MAUTIC_RUN_MIGRAION=true
+- MAUTIC_RUN_MIGRATION=true
 
 ### Upgrade Mautic instance
-Update your composer configuration accordingly, check your custom plugins for compatibility and restart the container. Just make sure `MAUTIC_RUN_MIGRAION` are enabled.
+Update your composer configuration accordingly, check your custom plugins for compatibility and restart the container. Just make sure `MAUTIC_RUN_MIGRATION` is enabled.
 
 ### Recommended mautic composer file
 https://packagist.org/packages/mautic/recommended-project
