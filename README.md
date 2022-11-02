@@ -6,7 +6,7 @@ The official docker image is not suited for running in containered cluster envir
 ### Key benefits
 1. dedicated docker user (no root execution)
 2. fixuid for development context (mounted source)
-3. dedicated directories for config and cache data (no in document root anymore)
+3. dedicated directories for config and cache data (outside of document root)
 4. cloud ready startup routine with composer install and database migrations
 
 ### Default Startup sequence scripts (`/usr/local/docker-entrypoint.d`)
