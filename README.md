@@ -64,6 +64,9 @@ services:
 - MAUTIC_RUN_COMPOSER_INSTALL=true
 - MAUTIC_RUN_MIGRAION=true
 
+### Upgrade Mautic instance
+Update your composer configuration accordingly, check your custom plugins for compatibility and restart the container. Just make sure `MAUTIC_RUN_MIGRAION` are enabled.
+
 ### Recommended mautic composer file
 https://packagist.org/packages/mautic/recommended-project
 
