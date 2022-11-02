@@ -21,7 +21,7 @@ You may add custom startup scripts via volume mounts or project-specific images 
 ```
 #!/bin/sh
 
-echo "hello world"|
+echo "hello world"
 
 exit 0
 ```
