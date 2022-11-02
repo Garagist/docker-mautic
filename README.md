@@ -39,10 +39,10 @@ services:
  mautic:
  image: garagist/mautic:composer-7.4
  environment:
- - MAUTIC_CONTEXT=Development
+   - MAUTIC_CONTEXT=Development
  volumes:
- - ./:/data
- - .mautic/config:/config
+   - ./:/data
+   - .mautic/config:/config
 ```
 ### Production run
 Set the MAUTIC_CONTEXT to production and you are ready to go
@@ -52,10 +52,10 @@ services:
  mautic:
  image: garagist/mautic:composer-7.4
  environment:
- - MAUTIC_CONTEXT=Production
+   - MAUTIC_CONTEXT=Production
  volumes:
- - ./:/data
- - .mautic/config:/config
+   - ./:/data
+   - .mautic/config:/config
 ```
 
 ### Env variables
