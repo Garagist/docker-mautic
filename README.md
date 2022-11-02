@@ -16,7 +16,15 @@ The official docker image is not suited for running in containered cluster envir
 4. Setup cron jobs (optional)
 
 ### Custom startup sequence scripts (`/data/docker-entrypoint.d`)
-You may add custom startup script via volume mounts or project-specific images to configure Mautic accordingly to your needs.
+You may add custom startup scripts via volume mounts or project-specific images to configure Mautic accordingly to your needs. The scripts are executed in alphabetical order. We recommend to add a number to the filename. For instance: `100_hello-world.sh`. 
+#### Example
+```
+#!/bin/sh
+
+echo "hello world"|
+
+exit 0
+```
 
 ## Getting started
 The image does not contain a composer.json or composer.lock file. It is recommended to use this image as a base image for "custom project" or "fixed version" images.
