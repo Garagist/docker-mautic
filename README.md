@@ -64,6 +64,9 @@ services:
 - MAUTIC_RUN_COMPOSER_INSTALL=true
 - MAUTIC_RUN_MIGRAION=true
 
+### Recommended mautic composer file
+https://packagist.org/packages/mautic/recommended-project
+
 ## TODO's
 - Test oAuth support
 
