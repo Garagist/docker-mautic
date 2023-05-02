@@ -53,8 +53,9 @@ services:
    image: garagist/mautic:composer-7.4
    environment:
      - MAUTIC_CONTEXT=Production
+     - MAUTIC_SSL_ENABLED=True
+     - MAUTIC_TLS_EMAIL=your@emila.loc
    volumes:
-     - ./:/data
      - .mautic/config:/config
 ```
 
