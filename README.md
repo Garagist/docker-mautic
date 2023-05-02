@@ -54,6 +54,7 @@ services:
    environment:
      - MAUTIC_CONTEXT=Production
      - MAUTIC_SSL_ENABLED=True
+     - MAUTIC_DOMAIN=mautic.loc
      - MAUTIC_TLS_EMAIL=your@mail.loc
    volumes:
      - .mautic/config:/config
