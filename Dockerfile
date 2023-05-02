@@ -91,7 +91,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 
 # SET DEFAULT USER
 RUN chmod +x /entrypoint.sh \
-    && chmod +x /mode.sh \ 
+    && chmod +x /mode.sh \
     && mkdir -p /var/run/php-fpm/ \
     && mkdir -p /data \
     && mkdir -p /cache \
