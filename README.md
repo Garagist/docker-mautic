@@ -37,7 +37,7 @@ If you would like to use the image to improve Mautic itself, or if you are worki
 version: '3.7'
 services:
  mautic:
-   image: garagist/mautic:composer-7.4
+   image: garagist/mautic:composer-8.0
    environment:
      - MAUTIC_CONTEXT=Development
    volumes:
@@ -50,11 +50,11 @@ Set the MAUTIC_CONTEXT to production and you are ready to go
 version: '3.7'
 services:
  mautic:
-   image: garagist/mautic:composer-7.4
+   image: garagist/mautic:composer-8.0
    environment:
      - MAUTIC_CONTEXT=Production
      - MAUTIC_SSL_ENABLED=True
-     - MAUTIC_TLS_EMAIL=your@emila.loc
+     - MAUTIC_TLS_EMAIL=your@mail.loc
    volumes:
      - .mautic/config:/config
 ```
