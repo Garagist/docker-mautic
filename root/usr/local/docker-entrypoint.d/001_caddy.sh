@@ -9,9 +9,9 @@ else
 fi
 
 if [[ "${ssl_enabled}" == "true" ]] && [[  -n "$MAUTIC_TLS_EMAIL" ]]; then
-  sed -e "s/\$TLS/tls ${MAUTIC_TLS_EMAIL}/g" -e "s/\$HTTP_SCHEMA/https/g" /usr/local/etc/caddy/Caddyfile > /home/docker/Caddyfile
+  sed -e "s/\$TLS/tls ${MAUTIC_TLS_EMAIL}/g" -e "s/\$HTTP_SCHEMA/${MAUTIC_DOMAIN}/g" /usr/local/etc/caddy/Caddyfile > /home/docker/Caddyfile
 else
-  sed -e "s/\$TLS/ /g" -e "s/\$HTTP_SCHEMA/http/g" /usr/local/etc/caddy/Caddyfile > /home/docker/Caddyfile
+  sed -e "s/\$TLS/ /g" -e "s/\$HTTP_SCHEMA/${MAUTIC_DOMAIN}/g" /usr/local/etc/caddy/Caddyfile > /home/docker/Caddyfile
 fi
 
 exit 0

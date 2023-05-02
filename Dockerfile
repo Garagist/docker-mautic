@@ -111,6 +111,7 @@ USER $USER:$GROUP
 WORKDIR /data
 
 ENV MAUTIC_SSL_ENABLED false
+ENV MAUTIC_DOMAIN http://
 
 # By default enable cron jobs
 ENV MAUTIC_CRON_RUN_JOBS true
