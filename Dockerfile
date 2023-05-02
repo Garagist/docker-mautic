@@ -20,8 +20,6 @@ RUN apk --no-cache add ca-certificates mailcap && \
     adduser -u $USERID -G $GROUP -h /home/$USER -s /bin/sh -D $USER && \
     chmod 755 /usr/bin/caddy
 
-COPY root/etc/Caddyfile /etc/Caddyfile
-
 USER docker:docker
 
 
@@ -111,6 +109,8 @@ USER $USER:$GROUP
 
 # Define working directory
 WORKDIR /data
+
+ENV MAUTIC_SSL_ENABLED false
 
 # By default enable cron jobs
 ENV MAUTIC_CRON_RUN_JOBS true
