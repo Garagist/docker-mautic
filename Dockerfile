@@ -23,7 +23,7 @@ RUN apk --no-cache add ca-certificates mailcap && \
 USER docker:docker
 
 
-FROM php:7.4-fpm-alpine AS worker
+FROM php:8.0-fpm-alpine AS worker
 
 LABEL vendor="Garagist"
 LABEL maintainer="David Spiola"
