@@ -1,6 +1,7 @@
 #!/bin/sh
+source /usr/local/sbin/checks.sh
 
-MAUTIC_RUN_COMPOSER_INSTALL="${MAUTIC_RUN_COMPOSER_INSTALL:-'true'}"
+MAUTIC_RUN_COMPOSER_INSTALL=$(check_true "$MAUTIC_RUN_COMPOSER_INSTALL")
 
 if [ $MAUTIC_RUN_COMPOSER_INSTALL == 'true' ]; then
     if [ ! -f /data/composer.json ]; then

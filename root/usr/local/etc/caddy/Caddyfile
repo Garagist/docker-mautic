@@ -1,6 +1,6 @@
-$HTTP_SCHEMA:// {
+SCHEMA {
 
-    $TLS
+    TLS
 
     root * /data/docroot
     php_fastcgi unix//var/run/php-fpm/www.sock

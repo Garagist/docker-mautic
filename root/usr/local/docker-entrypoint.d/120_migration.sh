@@ -1,6 +1,7 @@
 #!/bin/sh
+source /usr/local/sbin/checks.sh
 
-MAUTIC_RUN_MIGRATION="${MAUTIC_RUN_MIGRATION:-'true'}"
+MAUTIC_RUN_MIGRATION=$(check_true "$MAUTIC_RUN_MIGRATION")
 
 if [ $MAUTIC_RUN_MIGRATION == 'true' ]; then
     echo -e "run doctrine migration\n"
