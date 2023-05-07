@@ -40,6 +40,7 @@ services:
    image: garagist/mautic:composer-8.0
    environment:
      - MAUTIC_CONTEXT=Development
+     - MAUTIC_DOMAIN=mautic.your.domain
    volumes:
      - ./:/data
      - .mautic/config:/config
@@ -53,18 +54,21 @@ services:
    image: garagist/mautic:composer-8.0
    environment:
      - MAUTIC_CONTEXT=Production
+     - MAUTIC_DOMAIN=mautic.your.domain
      - MAUTIC_SSL_ENABLED=True
-     - MAUTIC_DOMAIN=mautic.loc
-     - MAUTIC_TLS_EMAIL=your@mail.loc
+     - MAUTIC_TLS_EMAIL=your@your.domain
    volumes:
      - .mautic/config:/config
 ```
 
-### Env variables
-- MAUTIC_CONTEXT=Development
-- MAUTIC_CRON_RUN_JOBS=true
-- MAUTIC_RUN_COMPOSER_INSTALL=true
-- MAUTIC_RUN_MIGRATION=true
+### Env variables defaults
+- MAUTIC_CONTEXT=Development # Development or Production
+- MAUTIC_CRON_RUN_JOBS=True # Whether to run cron jobs or not
+- MAUTIC_RUN_COMPOSER_INSTALL=true # Whether to run composer install or not
+- MAUTIC_RUN_MIGRATION=True # Whether to run database migrations or not
+- MAUTIC_DOMAIN=http:// # serv every domain 
+- MAUTIC_SSL_ENABLED=False # Whether to enable SSL or not
+- MAUTIC_TLS_EMAIL=none # Email address for Let's Encrypt
 
 ### Upgrade Mautic instance
 Update your composer configuration accordingly, check your custom plugins for compatibility and restart the container. Just make sure `MAUTIC_RUN_MIGRATION` is enabled.
