@@ -70,6 +70,14 @@ services:
 - MAUTIC_SSL_ENABLED=False # Whether to enable SSL or not
 - MAUTIC_TLS_EMAIL=none # Email address for Let's Encrypt
 
+- PHP_TIMEZONE=UTC
+- PHP_MEMORY_LIMIT=512M
+- PHP_UPLOAD_MAX_FILESIZE=256M
+- PHP_UPLOAD_MAX_FILESIZE=256M
+- PHP_ALLOW_URL_INCLUDE=1
+- PHP_MAX_EXECUTION_TIME=240
+- PHP_MAX_INPUT_VARS=1500
+
 ### Upgrade Mautic instance
 Update your composer configuration accordingly, check your custom plugins for compatibility and restart the container. Just make sure `MAUTIC_RUN_MIGRATION` is enabled.
 
