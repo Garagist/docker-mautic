@@ -94,17 +94,13 @@ RUN chmod +x /entrypoint.sh \
     && chmod +x /mode.sh \
     && mkdir -p /var/run/php-fpm/ \
     && mkdir -p /data \
-    && mkdir -p /cache \
-    && mkdir -p /config \
-    && mkdir -p /log \
+    && mkdir -p /mautic \
     && mkdir -p /tmp/mautic \
     && chown $USER:$GROUP /var/run/php-fpm/ \
     && chown -R $USER:$GROUP /usr/local/docker-entrypoint.d/ \
     && chmod -R +x /usr/local/docker-entrypoint.d/ \
     && chown -R $USER:$GROUP /data \
-    && chown -R $USER:$GROUP /log \
-    && chown -R $USER:$GROUP /cache \
-    && chown -R $USER:$GROUP /config
+    && chown -R $USER:$GROUP /mautic \
 USER $USER:$GROUP
 
 # Define working directory

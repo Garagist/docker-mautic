@@ -1,19 +1,19 @@
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-       */5 * * * *     php /data/bin/console mautic:import > /logs/cron.pipe 2>&1
-5,20,35,50 * * * *     php /data/bin/console mautic:campaigns:rebuild > /logs/cron.pipe 2>&1
-2,17,32,47 * * * *     php /data/bin/console mautic:campaigns:trigger > /logs/cron.pipe 2>&1
-0,15,30,45 * * * *     php /data/bin/console mautic:messages:send > /logs/cron.pipe 2>&1
-0,15,30,45 * * * *     php /data/bin/console mautic:emails:send > /logs/cron.pipe 2>&1
-0,15,30,45 * * * *     php /data/bin/console mautic:email:fetch > /logs/cron.pipe 2>&1
-0,15,30,45 * * * *     php /data/bin/console mautic:social:monitoring > /logs/cron.pipe 2>&1
-0,15,30,45 * * * *     php /data/bin/console mautic:webhooks:process > /logs/cron.pipe 2>&1
-0,15,30,45 * * * *     php /data/bin/console mautic:broadcasts:send > /logs/cron.pipe 2>&1
-         * 1 * * *     php /data/bin/console mautic:maintenance:cleanup --days-old=365 > /logs/cron.pipe 2>&1
-        0 4 15 * *     php /data/bin/console mautic:iplookup:download > /logs/cron.pipe 2>&1
-       */5 * * * *     php /data/bin/console mautic:reports:scheduler > /logs/cron.pipe 2>&1
-        0 5 10 * *     php /data/bin/console mautic:unusedip:delete > /logs/cron.pipe 2>&1
+       */5 * * * *     php /data/bin/console mautic:import > /mautic/logs/cron.pipe 2>&1
+5,20,35,50 * * * *     php /data/bin/console mautic:campaigns:rebuild > /mautic/logs/cron.pipe 2>&1
+2,17,32,47 * * * *     php /data/bin/console mautic:campaigns:trigger > /mautic/logs/cron.pipe 2>&1
+0,15,30,45 * * * *     php /data/bin/console mautic:messages:send > /mautic/logs/cron.pipe 2>&1
+0,15,30,45 * * * *     php /data/bin/console mautic:emails:send > /mautic/logs/cron.pipe 2>&1
+0,15,30,45 * * * *     php /data/bin/console mautic:email:fetch > /mautic/logs/cron.pipe 2>&1
+0,15,30,45 * * * *     php /data/bin/console mautic:social:monitoring > /mautic/logs/cron.pipe 2>&1
+0,15,30,45 * * * *     php /data/bin/console mautic:webhooks:process > /mautic/logs/cron.pipe 2>&1
+0,15,30,45 * * * *     php /data/bin/console mautic:broadcasts:send > /mautic/logs/cron.pipe 2>&1
+         * 1 * * *     php /data/bin/console mautic:maintenance:cleanup --days-old=365 > /mautic/logs/cron.pipe 2>&1
+        0 4 15 * *     php /data/bin/console mautic:iplookup:download > /mautic/logs/cron.pipe 2>&1
+       */5 * * * *     php /data/bin/console mautic:reports:scheduler > /mautic/logs/cron.pipe 2>&1
+        0 5 10 * *     php /data/bin/console mautic:unusedip:delete > /mautic/logs/cron.pipe 2>&1
 
 # download geoip db on start if it does not exist
-@reboot                [[ "$(ls -A /data/bin/cache/ip_data 2>/dev/null)" ]] || php /data/bin/console mautic:iplookup:download > /log/cron.pipe 2>&1
+@reboot                [[ "$(ls -A /data/bin/cache/ip_data 2>/dev/null)" ]] || php /data/bin/console mautic:iplookup:download > /mautic/logs/cron.pipe 2>&1

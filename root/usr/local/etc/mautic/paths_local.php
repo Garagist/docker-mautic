@@ -7,8 +7,8 @@ $paths = [
     'asset_prefix' => '',
     'plugins'      => 'plugins',
     'translations' => 'translations',
-    'local_config' => '/config/local.php',
-    'cache_path' => '/cache',
+    'local_config' => '/mautic/config/local.php',
+    'cache_path' => '/mautic/cache',
     'tmp_path' => '/tmp/mautic',
-    'log_path' => '/logs',
+    'log_path' => '/mautic/logs',
 ];
