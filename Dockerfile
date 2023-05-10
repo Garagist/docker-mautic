@@ -100,7 +100,7 @@ RUN chmod +x /entrypoint.sh \
     && chown -R $USER:$GROUP /usr/local/docker-entrypoint.d/ \
     && chmod -R +x /usr/local/docker-entrypoint.d/ \
     && chown -R $USER:$GROUP /data \
-    && chown -R $USER:$GROUP /mautic \
+    && chown -R $USER:$GROUP /mautic
 USER $USER:$GROUP
 
 # Define working directory
