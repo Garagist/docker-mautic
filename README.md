@@ -43,7 +43,7 @@ services:
      - MAUTIC_DOMAIN=mautic.your.domain
    volumes:
      - ./:/data
-     - .mautic/config:/config
+     - .mautic/config:/mautic/config
 ```
 ### Production run
 Set the MAUTIC_CONTEXT to production and you are ready to go
@@ -58,7 +58,7 @@ services:
      - MAUTIC_SSL_ENABLED=True
      - MAUTIC_TLS_EMAIL=your@your.domain
    volumes:
-     - .mautic/config:/config
+     - .mautic/config:/mautic/config
 ```
 
 ### Env variables defaults
