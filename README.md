@@ -41,6 +41,10 @@ services:
    environment:
      - MAUTIC_CONTEXT=Development
      - MAUTIC_DOMAIN=mautic.your.domain
+     - MAUTIC_DB_HOST=db
+     - MAUTIC_DB_USER=db-user
+     - MAUTIC_DB_PASSWORD=db-password
+     - MAUTIC_DB_NAME=db-name
    volumes:
      - ./:/data
      - .mautic/config:/mautic/config
@@ -57,6 +61,10 @@ services:
      - MAUTIC_DOMAIN=mautic.your.domain
      - MAUTIC_SSL_ENABLED=True
      - MAUTIC_TLS_EMAIL=your@your.domain
+     - MAUTIC_DB_HOST=db
+     - MAUTIC_DB_USER=db-user
+     - MAUTIC_DB_PASSWORD=db-password
+     - MAUTIC_DB_NAME=db-name
    volumes:
      - .mautic/config:/mautic/config
 ```
@@ -69,6 +77,10 @@ services:
 - MAUTIC_DOMAIN=http:// # serv every domain 
 - MAUTIC_SSL_ENABLED=False # Whether to enable SSL or not
 - MAUTIC_TLS_EMAIL=none # Email address for Let's Encrypt
+- MAUTIC_DB_HOST=db # Database host
+- MAUTIC_DB_USER=db-user # Database user
+- MAUTIC_DB_PASSWORD=db-password # Database password
+- MAUTIC_DB_NAME=db-name # Database name
 
 - PHP_TIMEZONE=UTC
 - PHP_MEMORY_LIMIT=512M
