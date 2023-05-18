@@ -74,13 +74,13 @@ services:
 - MAUTIC_CRON_RUN_JOBS=True # Whether to run cron jobs or not
 - MAUTIC_RUN_COMPOSER_INSTALL=true # Whether to run composer install or not
 - MAUTIC_RUN_MIGRATION=True # Whether to run database migrations or not
-- MAUTIC_DOMAIN=http:// # serv every domain 
+- MAUTIC_DOMAIN=foo.com bar.com  # Domains to be used for the vhost (string list) 
 - MAUTIC_SSL_ENABLED=False # Whether to enable SSL or not
 - MAUTIC_TLS_EMAIL=none # Email address for Let's Encrypt
 - MAUTIC_DB_HOST=db # Database host
 - MAUTIC_DB_USER=db-user # Database user
 - MAUTIC_DB_PASSWORD=db-password # Database password
-- MAUTIC_DB_NAME=db-name # Database name
+- MAUTIC_DB_NAME=db-name #
 
 - PHP_TIMEZONE=UTC
 - PHP_MEMORY_LIMIT=512M
