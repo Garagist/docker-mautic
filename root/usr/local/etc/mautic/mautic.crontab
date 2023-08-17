@@ -4,6 +4,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
        */5 * * * *     php /data/bin/console mautic:import > /mautic/logs/cron.pipe 2>&1
 5,20,35,50 * * * *     php /data/bin/console mautic:campaigns:rebuild > /mautic/logs/cron.pipe 2>&1
 2,17,32,47 * * * *     php /data/bin/console mautic:campaigns:trigger > /mautic/logs/cron.pipe 2>&1
+10,30,45,55 * * * *    php /data/bin/console mautic:segments:update > /mautic/logs/cron.pipe 2>&1
 0,15,30,45 * * * *     php /data/bin/console mautic:messages:send > /mautic/logs/cron.pipe 2>&1
 0,15,30,45 * * * *     php /data/bin/console mautic:emails:send > /mautic/logs/cron.pipe 2>&1
 0,15,30,45 * * * *     php /data/bin/console mautic:email:fetch > /mautic/logs/cron.pipe 2>&1
