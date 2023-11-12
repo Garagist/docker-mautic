@@ -3,7 +3,9 @@ DOMAINS {
     TLS
 
     root * /data/docroot
-    php_fastcgi unix//var/run/php-fpm/www.sock
+    php_fastcgi unix//var/run/php-fpm/www.sock {
+        trusted_proxies private_ranges
+    }
     file_server
 
     encode zstd gzip
