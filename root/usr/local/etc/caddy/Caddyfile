@@ -3,19 +3,41 @@ DOMAINS {
     TLS
 
     root * /data/docroot
+
+    # PHP FastCGI configuration
     php_fastcgi unix//var/run/php-fpm/www.sock {
         trusted_proxies private_ranges
     }
+
+    # File server configuration
     file_server
 
+    # Encoding configuration
     encode zstd gzip
 
+    # Logging configuration
     log {
         output stderr
         level info
     }
 
-    route /* {
-        try_files {path} {path}/ /index.php?{query}     
+    # Define a matcher for allowed paths
+    @allowed {
+        path /index.php
+        path /index.html
+        path /media/*
     }
+
+    # Handle allowed paths
+    handle @allowed {
+        # Use try_files for allowed paths
+        try_files {path} {path}/ /index.php?{query}
+    }
+
+    # Handle all other requests and block them
+    handle {
+        # Respond with 403 Forbidden for any path not matching @allowed
+        respond 403
+    }
+
 }
