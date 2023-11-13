@@ -116,7 +116,7 @@ ENV MAUTIC_CRON_RUN_JOBS true
 ENV MAUTIC_RUN_COMPOSER_INSTALL true
 
 # By default apply database mirgrations on startup
-ENV MAUTIC_RUN_MIGRAION true
+ENV MAUTIC_RUN_MIGRATION true
 
 # Expose ports
 EXPOSE 80/tcp
