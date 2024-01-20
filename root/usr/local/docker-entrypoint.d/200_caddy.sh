@@ -23,9 +23,16 @@ do
       DOMAINS="$DOMAINS, ${SCHEMA}${item}"
     fi
 done
-
 echo "Domains ${DOMAINS}"
 
-sed -e "s#TLS#${TLS}#g" -e "s#DOMAINS#${DOMAINS}#g" /usr/local/etc/caddy/Caddyfile > /mautic/Caddyfile
+if [ $MAUTIC_CONTEXT == 'Development' ]
+  then
+    SCRIPT="index_dev"
+  else
+    SCRIPT="index"
+fi
 
+sed -e "s#TLS#${TLS}#g" -e "s#DOMAINS#${DOMAINS}#g" -e "s#SCRIPT#${SCRIPT}#g" /usr/local/etc/caddy/Caddyfile > /mautic/Caddyfile
+echo "Environment: ${MAUTIC_CONTEXT}"
+echo "Script: ${SCRIPT}"
 exit 0

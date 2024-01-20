@@ -22,21 +22,25 @@ DOMAINS {
     }
 
     # Define a matcher for allowed paths
-    @allowed {
-        path /index.php
-        path /index.html
-        path /media/*
-    }
-
-    # Handle allowed paths
-    handle @allowed {
-        # Use try_files for allowed paths
-        try_files {path} {path}/ /index.php?{query}
+    @deny {
+        path /app
+        path /var
+        path /plugins
+        path /themes
+        path /translations
+        path /upgrade
+        path /autoload
     }
 
     # Handle all other requests and block them
     handle {
-        # Respond with 403 Forbidden for any path not matching @allowed
+        # Use try_files for allowed paths
+        try_files {path} {path}/ /SCRIPT.php?{query}
+    }
+
+    # Handle deny paths
+    handle @deny {
+        # Respond with 403 Forbidden for any path matching @deny
         respond 403
     }
 
