@@ -115,6 +115,7 @@ ENV MAUTIC_CRON_RUN_JOBS true
 # By default install composer dependencies on startup
 ENV MAUTIC_RUN_COMPOSER_INSTALL true
 
+
 # By default apply database mirgrations on startup
 ENV MAUTIC_RUN_MIGRATION true
 

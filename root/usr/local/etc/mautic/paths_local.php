@@ -2,12 +2,12 @@
 
 $paths = [
     //customizable
-    'themes'       => '/mautic/data/themes',
-    'assets'       => '/mautic/data/assets',
+    'themes'       => 'themes', // public folder in docroot
+    'assets'       => 'media', // public folder in docroot
+    'plugins'      => 'plugins', // public folder in docroot
     'asset_prefix' => '',
-    'image_path'   => '../../mautic/data/media',
-    'plugins'      => '/mautic/data/plugins',
-    'translations' => '/mautic/data/translations',
+    'image_path'   => '../../mautic/data/files', // private folder for uploaded assets
+    'translations' => '../../mautic/data/translations', // private folder for translations
     'local_config' => '/mautic/config/local.php',
     'cache_path' => '/mautic/cache',
     'tmp_path' => '/tmp/mautic',

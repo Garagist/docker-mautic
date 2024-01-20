@@ -8,7 +8,7 @@ if [ $MAUTIC_CRON_RUN_JOBS == 'true' ]; then
     mkdir -p /data/cron/
     mkdir -p /data/log/
     cp /usr/local/etc/mautic/mautic.crontab /mautic/cron/docker
-    crond -b -c /mautic/cron/ -L /mautic/logs/crond.log -l $MAUTIC_CRON_LOG_LEVEL
+    crond -b -c /mautic/cron -L /mautic/logs/crond.log -l $MAUTIC_CRON_LOG_LEVEL
 else
     echo -e "cron jobs disabled\n"
 fi;
