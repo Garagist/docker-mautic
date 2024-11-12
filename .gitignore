@@ -3,3 +3,6 @@
 /composer.json
 /.idea
 /.mautic
+.DS_Store
+.aider*
+.env

@@ -13,26 +13,29 @@ else
   echo "tls disabled"
 fi
 
-DOMAINS=""
-for item in $MAUTIC_DOMAIN
-do
-    if [ -z "$DOMAINS" ]
-    then
-      DOMAINS="${SCHEMA}${item}"
-    else
-      DOMAINS="$DOMAINS, ${SCHEMA}${item}"
-    fi
-done
+if [ -z "$MAUTIC_DOMAIN" ]; then
+  DOMAINS="http://"
+else
+  DOMAINS=""
+  for item in $MAUTIC_DOMAIN
+  do
+      if [ -z "$DOMAINS" ]
+      then
+        DOMAINS="${SCHEMA}${item}"
+      else
+        DOMAINS="$DOMAINS, ${SCHEMA}${item}"
+      fi
+  done
+fi
 echo "Domains ${DOMAINS}"
 
-if [ $MAUTIC_CONTEXT == 'Development' ]
+if [ "$MAUTIC_CONTEXT" = "Development" ]
   then
-    SCRIPT="index_dev"
+    echo "development context"
   else
-    SCRIPT="index"
+    echo "production context"
 fi
 
-sed -e "s#TLS#${TLS}#g" -e "s#DOMAINS#${DOMAINS}#g" -e "s#SCRIPT#${SCRIPT}#g" /usr/local/etc/caddy/Caddyfile > /mautic/Caddyfile
+sed -e "s#TLS#${TLS}#g" -e "s#DOMAINS#${DOMAINS}#g" /usr/local/sites-enabled/default.conf > /mautic/Caddyfile
 echo "Environment: ${MAUTIC_CONTEXT}"
-echo "Script: ${SCRIPT}"
 exit 0
