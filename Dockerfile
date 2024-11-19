@@ -32,7 +32,6 @@ ENV MAUTIC_RUN_COMPOSER_INSTALL true
 ENV MAUTIC_RUN_MIGRATION true
 
 COPY .mautic/composer.json /data/composer.json
-COPY .mautic/DistributionBundles/ /data/DistributionBundles
 
 # Expose ports
 EXPOSE 80/tcp
