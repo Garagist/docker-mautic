@@ -1,0 +1,55 @@
+default:
+    tags:
+      - ds-runner
+
+variables:
+  GIT_SSL_NO_VERIFY: "1"
+  RUNNER_SCRIPT_TIMEOUT: 120m
+
+stages:
+  - build
+  - deploy
+
+cache:
+  key: "${CI_PIPELINE_ID}-${CI_COMMIT_REF_SLUG}"
+  paths:
+    - .tmp/
+
+.general_rules: &general_rules
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: never
+
+.build-image:
+  stage: build
+  image: oidagroup/deploy-runner:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'production'
+    - if: $CI_COMMIT_BRANCH != 'production'
+      when: manual
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - Dockerfile
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo $HUB_PASSWORD | docker login -u $HUB_USER --password-stdin
+    - mkdir -p .tmp
+    - ls -la .tmp
+  script:
+    - |
+      if [ "$(docker buildx ls | grep -c docker-container)" -eq 0 ]; then
+        docker buildx create --name buildx-container --driver=docker-container
+      fi
+    - docker buildx use buildx-container
+    - docker buildx build --platform linux/arm64,linux/amd64 --pull --push --no-cache -f ./Dockerfile -t "oidagroup/mautic-worker:${CI_COMMIT_BRANCH}" .
+
+Build Image:
+  extends: .build-image
+  environment:
+    name: production
+  <<: *general_rules
+  when: manual
